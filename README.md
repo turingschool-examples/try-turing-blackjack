@@ -2,4 +2,4 @@
 
 Play blackjack on the web!
 
-![Screenshot](screenshot.png)
+![Screenshot](./assets/ttblackjack.png)
