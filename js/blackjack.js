@@ -34,7 +34,7 @@ var blackjack = {};
     blackjack.util = {
 
         // Cards in a Deck
-        box: [2,3,4,5,6,7,8,9,10,'J','Q','K','A'],  
+        box: [2,3,4,5,6,7,8,9,10,'J','Q','K','A'],
 
         // Get Deck
         getDeck: function(count) {
@@ -81,7 +81,7 @@ var blackjack = {};
 
             if (first == undefined) first = true;
 
-            // Ensure the hand has all numbers. Only needed on 
+            // Ensure the hand has all numbers. Only needed on
             // the first iteration
             if (first) {
                 hand = hand.map(function(c) {
@@ -107,7 +107,7 @@ var blackjack = {};
                 } else {
                     return count;
                 }
-                
+
             }
 
         },
@@ -118,6 +118,19 @@ var blackjack = {};
             if (color == undefined) color = 'black';
             if (bg == undefined) bg = 'white';
             console.log('%c ' + message + ' ', 'color:' + color + '; background-color:'+bg);
+        },
+
+        // Report to console with pretty colors
+        displayResult: function(el, message) {
+            $(el).show()
+            $(el).text(message)
+        },
+        displayCards: function(el, cards) {
+          $(el).empty()
+          let allCards = cards.map((card) => {
+            return `<div class="card">${card}</div>`
+          })
+          $(el).append(allCards)
         },
 
         // Warn
@@ -186,23 +199,23 @@ var blackjack = {};
 
             // Clear console
             if (settings.clearOnStart) console.clear();
-            
+
             // Cannot start a new game if one is already in play
             if (this.inPlay) {
-                blackjack.util.warn('Cannot start a new game while in a game');
+                blackjack.util.displayResult('#result', 'Cannot start a new game while in a game');
                 this.showCards();
                 return;
             }
 
             // Cannot bet less than 1
             if (bet < 1) {
-                blackjack.util.warn('Cannot bet below $1');
-                return;
+              blackjack.util.displayResult('#result', 'Cannot bet below $1');
+              return;
             }
 
             // Cannot bet less than 1
             if (bet > blackjack.bank.amount) {
-                blackjack.util.warn('Cannot bet more than your bank ($' + blackjack.bank.amount + ')');
+                blackjack.util.displayResult('#result', 'Cannot bet more than your bank ($' + blackjack.bank.amount + ')');
                 return;
             }
 
@@ -219,12 +232,14 @@ var blackjack = {};
             this.deal(this.dealer, blackjack.deck.getCard());
             this.deal(this.player, blackjack.deck.getCard());
             this.deal(this.dealer, blackjack.deck.getCard());
-            
+
             // Opening count
             var dealerCount = blackjack.util.count(this.dealer);
             var playerCount = blackjack.util.count(this.player);
 
-            blackjack.util.report('New Game, Bet: $' + this.bet, 'white', 'blue');
+            $result.hide()
+            $stayOrHit.show()
+            $play.removeClass('active')
 
             // Push if both player and dealer has blackjack
             if (dealerCount == 21 && playerCount == 21) {
@@ -268,11 +283,11 @@ var blackjack = {};
         // report should reveal all dealer cards
         showCards: function(full) {
             if (full) {
-                blackjack.util.report('Dealer: ' + this.dealer.join() + ' (' + blackjack.util.count(this.dealer) + ')');
+                blackjack.util.displayCards('#dealer', this.dealer);
             } else {
-               blackjack.util.report('Dealer: ' + [this.dealer[0], '?'].join());
+               blackjack.util.displayCards('#dealer', [this.dealer[0], '?']);
             }
-            blackjack.util.report('Player: ' + this.player.join() + ' (' + blackjack.util.count(this.player) + ')');
+            blackjack.util.displayCards('#player', this.player);
         },
 
         // Player Hit
@@ -367,12 +382,14 @@ var blackjack = {};
             }
 
         },
-        
+
         // Player win. Indicate the "multiplier", defaults to 2 x bet
         playerWin: function(m) {
             if (m == undefined) m = 2;
             var winnings = this.bet * m;
-            blackjack.util.report('Win', 'white', 'green');
+            $stayOrHit.hide()
+            blackjack.util.displayResult('#result', 'You got lucky this time');
+            $play.addClass('active')
             this.showCards(true);
             blackjack.bank.add(winnings);
             blackjack.bank.report();
@@ -386,7 +403,9 @@ var blackjack = {};
         // Player Push. Add the money back to the player's bank
         playerPush: function() {
             blackjack.bank.add(this.bet);
-            blackjack.util.report('Push', 'white', 'blue');
+            $stayOrHit.hide()
+            blackjack.util.displayResult('#result', 'Push!');
+            $play.addClass('active')
             this.showCards(true);
 
             // Publish
@@ -397,7 +416,9 @@ var blackjack = {};
 
         // Player Lose
         playerLose: function() {
-            blackjack.util.report('Lose', 'white', 'red');
+            $stayOrHit.hide()
+            blackjack.util.displayResult('#result', 'You lose you loser!');
+            $play.addClass('active')
             this.showCards(true);
             blackjack.bank.report();
             var bet = this.bet;
@@ -444,10 +465,3 @@ var stay = function() {
 var bank = function() {
     blackjack.bank.report();
 }
-
-/**
- * Initial Console Messages
- */
-
-blackjack.bank.report();
-blackjack.util.report('Start by typing play()');

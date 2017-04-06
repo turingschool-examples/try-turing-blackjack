@@ -1,10 +1,145 @@
+body {
+  margin: 0;
+}
+
 .bank {
     min-width: 200px;
     position: absolute;
     top: 30px;
     right: 30px;
     padding: 10px;
-    background-color: #333;
+    background-color: #48342b;
     color: #ddd;
     font-size: 4em;
+    text-align: center;
+}
+
+.autoplay {
+    position: absolute;
+    top: 150px;
+    right: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+button {
+  width: 100px;
+  height: 50px;
+  background: #258054;
+  color: white;
+  font-size: 14px;
+}
+
+#actions {
+  justify-self: center;
+  align-self: center;
+  grid-area: actions;
+}
+#play {
+  background: red;
+  width: 150px;
+  height: 50px;
+  color: white;
+  font-size: 18px;
+}
+#quit {
+  background: #1d699f;
+  width: 150px;
+  height: 50px;
+  color: white;
+  font-size: 18px;
+}
+.active {
+    animation:
+      stretch
+      1.5s
+      ease-out
+      0s
+      alternate
+      infinite
+      none
+      running;
+}
+
+@keyframes stretch {
+  0% {
+    transform: scale(.8);
+    border-radius: 10px;
+  }
+  50% {
+    background-color: #1d699f;
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+#hit {
+  background: #9f1d28;
+}
+#stay {
+  background: #1d9f94;
+}
+#stay-or-hit {
+  display: none;
+  justify-self: center;
+  align-self: center;
+  grid-area: stay-or-hit;
+}
+#dealer {
+  justify-self: center;
+  align-self: center;
+  grid-area: dealer;
+  font-size: 24px;
+  font-weight: 900;
+}
+#result {
+  justify-self: center;
+  align-self: center;
+  grid-area: result;
+  font-size: 24px;
+  font-weight: 900;
+  color: red;
+  background: rgba(255,255,255,.7);
+  padding: 25px;
+  display: none;
+}
+#player {
+  grid-area: player;
+  align-self: center;
+  justify-self: center;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+
+#table {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../assets/table.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 20% 15% 12% 12% 15%;
+  grid-template-areas:
+    ". actions ."
+    ". dealer ."
+    ". stay-or-hit ."
+    ". result ."
+    ". player ."
+    ". . ."
+}
+
+.card {
+  height: 80px;
+  width: 50px;
+  display: inline-block;
+  background: white;
+  color: red;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  border: 1px black solid;
 }
