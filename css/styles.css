@@ -127,15 +127,3 @@ button {
     ". player ."
     ". . ."
 }
-
-.card {
-  height: 80px;
-  width: 50px;
-  display: inline-block;
-  background: white;
-  color: red;
-  border-radius: 10px;
-  margin: 5px;
-  padding: 5px;
-  border: 1px black solid;
-}
