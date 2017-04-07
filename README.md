@@ -1,4 +1,4 @@
-# Try Turing Blackjack
+g# Try Turing Blackjack
 
 Play blackjack on the web!
 
