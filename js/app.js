@@ -6,7 +6,8 @@ const $stay = $('#stay')
 
 $play.on('click', (e) => {
   e.preventDefault()
-  play()
+  let bet = $('#bet').val()
+  bet ? play(bet) : play()
 })
 
 $hit.on('click', (e) => {

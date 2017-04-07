@@ -35,50 +35,46 @@ button {
   align-self: center;
   grid-area: actions;
 }
+
 #play {
-  background: red;
+  background: #48342b;
   width: 150px;
   height: 50px;
   color: white;
   font-size: 18px;
-}
-#quit {
-  background: #1d699f;
-  width: 150px;
-  height: 50px;
-  color: white;
-  font-size: 18px;
-}
-.active {
-    animation:
-      stretch
-      1.5s
-      ease-out
-      0s
-      alternate
-      infinite
-      none
-      running;
+  border-radius: 10px;
 }
 
-@keyframes stretch {
-  0% {
-    transform: scale(.8);
-    border-radius: 10px;
-  }
-  50% {
-    background-color: #1d699f;
-  }
-  100% {
-    transform: scale(1.2);
-  }
+#bet {
+  background: #258054;
+  width: 150px;
+  height: 50px;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: white;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: white;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: white;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
 }
 
 #hit {
-  background: #9f1d28;
+  background: black;
 }
 #stay {
-  background: #1d9f94;
+  background: white;
+  color: black;
 }
 #stay-or-hit {
   display: none;
