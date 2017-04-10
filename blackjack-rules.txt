@@ -30,6 +30,10 @@ You cannot play on two aces after they are split.
 
 You can double on a hand resulting from a split, tripling or quadrupling you bet.
 
-For more information about Blackjack rules,strategy, and etiquette you can visit Hit or Stand's recommended book list.
+Blackjack Strategy
+
+Below you will find the strategy tables for both Atlantic City and Las Vegas. These table are what the Hit or Stand games is based on. Hit or Stand accepts a correct move from either Vegas or A.C.(they differ only slightly). It needs to be noted that using the below tables will not cause you to make money - the odds are still against you. The only way to put the odds of Blackjack in you favor is to count cards which is a large topic of its own.
+
+Image
 
 These rules found at hit-or-stand.net http://www.hitorstand.net/strategy.php
